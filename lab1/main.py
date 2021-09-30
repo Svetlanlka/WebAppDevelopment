@@ -1,7 +1,7 @@
 import sys
 import math
 
-def get_coef(index, message):
+def get_params(index, message):
     try:
         coef = float(sys.argv[index])
     except:
@@ -28,9 +28,9 @@ def calculate(a, b, c):
 
 
 def main():
-    a = get_coef(1, 'Input coef А:')
-    b = get_coef(2, 'Input coef B:')
-    c = get_coef(3, 'Input coef C:')
+    a = get_params(1, 'Input coef А:')
+    b = get_params(2, 'Input coef B:')
+    c = get_params(3, 'Input coef C:')
     roots = calculate(a, b, c)
     
     number_of_roots = len(roots)

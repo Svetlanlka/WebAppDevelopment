@@ -1,0 +1,19 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="mt-5">{{donut.name}}</h1>
+    <div class="card" style="width: 18rem;">
+      <img src = "{{MEDIA_URL}}{{donut.picture.url}}" class="card-img-top donut-img" alt={{donut.name}}>
+      <div class="card-body">
+        <h5 class="card-title">{{donut.cost}} руб.</h5>
+        <p class="card-text">{{donut.info}}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{donut.date}}</li>
+        </ul>
+      </div>
+    </div>
+    <a href="{% url 'index' %}" class="btn btn-primary">Вернуться на главную страницу</a>
+  </div>
+{% endblock content %}

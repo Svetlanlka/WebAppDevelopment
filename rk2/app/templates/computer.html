@@ -1,0 +1,30 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5 d-flex justify-content-end">
+      <a href="{% url 'index' %}" class="btn btn-primary">Вернуться на главную страницу</a>
+    </h1>
+    <div class="d-flex">
+      <div class="card card-computer">
+        <img src = "{{MEDIA_URL}}{{computer.photo.url}}" class="card-img-top card-img" alt={{computer.name}}>
+        <div class="card-body">
+          <h3 class="card-title">{{computer.name}}</h5>
+          <p class="card-text">{{computer.cost}} руб.</h5>
+          <p class="card-text">{{computer.publication_year}}</p>
+        </div>
+      </div>
+      <ol class="list-group list-group-numbered" style="margin-left:2rem;">
+        {% for os in operating_systems %}
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">{{os.name}}</div>
+              {{os.publication_year}}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+{% endblock content %}

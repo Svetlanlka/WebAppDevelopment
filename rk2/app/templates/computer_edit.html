@@ -1,0 +1,28 @@
+{% extends "computer_add.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Изменение параметров компьютера {% endblock title %}
+
+{% block form %}
+  <form class="row" method="POST" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{computer.name}}">
+    </div>
+    <div class="mb-3">
+      <label for="cost" class="form-label">Cost</label>
+      <input type="text" class="form-control" id='cost' name="cost" value="{{computer.cost}}">
+    </div>
+    <div class="mb-3">
+      <label for="photo" class="form-label">Фото</label>
+      <input type="file" class="form-control" id='photo' name="photo" value="{{computer.photo}}">
+    </div>
+    <div class="d-flex justify-content-end mt-2">
+      <button class="btn btn-dark" type="submit">
+        Изменить
+      </button>
+    </div>
+  </form>
+{% endblock form %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
+from django.http import HttpResponseRedirect
 from datetime import date
 from app.models import OperatingSystem, Computer
 from django.shortcuts import render, redirect
@@ -52,8 +53,58 @@ def computer_edit(request, id):
 
 def computer_delete(request, id):
   try:
-    c = Computer.objects.get(id=id)
+    c = Computer.objects.get(pk=id)
     c.delete()
     return redirect(reverse('index'))
   except Computer.DoesNotExist:
     return HttpResponseNotFound("Computer not found")
+
+def os_add(request, id):
+  computer = Computer.objects.get(pk=id)
+
+  if request.method == "POST":
+    os = OperatingSystem()
+    os.name = request.POST.get("name")
+    os.publication_year = request.POST.get("publication_year")
+    os.computer = computer
+    os.save()
+  else:
+    if request.method == 'GET':
+      return render(request, "computer.html")
+
+  return HttpResponseRedirect("/")
+
+def os_delete(request, id):
+  try:
+    os = OperatingSystem.objects.get(pk=id)
+    os.delete()
+    return HttpResponseRedirect("/")
+  except Computer.DoesNotExist:
+    return HttpResponseNotFound("OperatingSystem not found")
+
+def os_edit(request, id):
+  try:
+    os = OperatingSystem.objects.get(pk=id)
+
+    if request.method == "POST":
+      os.name = request.POST.get("name")
+      os.publication_year = request.POST.get("publication_year")
+      os.save()
+      return HttpResponseRedirect("/")
+    else:
+      return render(request, "os_edit.html", {"os_edit": os})
+
+  except Computer.DoesNotExist:
+    return HttpResponseNotFound("Computer not found")
+
+def report(request):
+    operating_systems = OperatingSystem.objects.all()
+    computers = Computer.objects.all()
+
+    operating_systems_join_computers = [{'operating_systems': o, 'computers': c}
+      for c in computers
+      for o in operating_systems
+      if o.computer.id == c.id
+    ]
+
+    return render(request, 'report.html', {'r': operating_systems_join_computers, 'oss': operating_systems, 'computers': computers})

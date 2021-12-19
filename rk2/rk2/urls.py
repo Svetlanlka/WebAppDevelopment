@@ -27,6 +27,10 @@ urlpatterns = [
     path('computer_add/', views.computer_add, name='computer_add'),
     path('computer_edit/<int:id>', views.computer_edit, name='computer_edit'),
     path('computer_delete/<int:id>', views.computer_delete, name='computer_delete'),
+    path('os_add/<int:id>', views.os_add, name='os_add'),
+    path('os_edit/<int:id>', views.os_edit, name='os_edit'),
+    path('os_delete/<int:id>', views.os_delete, name='os_delete'),
+    path('report/', views.report, name="report"),
 ]
 
 if settings.DEBUG:

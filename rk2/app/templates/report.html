@@ -1,0 +1,25 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container mb-5">
+    <h1 class="mt-5 d-flex justify-content-end">
+      <a href="{% url 'index' %}" class="btn btn-primary">Вернуться на главную страницу</a>
+    </h1>
+    <h1>Отчет</h1>
+    {% for rr in r %}
+      <div class="card-body">
+        <h3 class="card-title">{{rr.operating_systems.name}}</h3>
+        <p class="card-text">{{rr.operating_systems.publication_year}} руб.</p>
+        <h5>Компьютеры с такой операционной системой:</h5>
+        <ul>
+        {% for rrr in r %}
+        {% if rrr.computers.id == rr.operating_systems.computer.id %}
+        <li>{{rrr.computers.name}}</li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

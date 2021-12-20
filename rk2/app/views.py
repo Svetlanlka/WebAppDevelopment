@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
@@ -23,17 +24,19 @@ def computer(request, id):
   return render(request, 'computer.html', context)
 
 def computer_add(request):
-  if request.method == "POST":
-    c = Computer()
-    c.name = request.POST.get("name")
-    c.cost = request.POST.get("cost")
-    c.photo = request.POST.get("photo")
-    c.save()
-  else:
-    if request.method == 'GET':
-      form = ComputerForm()
-      return render(request, "computer_add.html", {"form": form})
-  return redirect(reverse('index'))
+  try:
+    if request.method == "POST":
+      form = ComputerForm(request.POST, files=request.FILES)
+      if form.is_valid():
+        form.save()
+        return redirect(reverse('index'))
+    else:
+      if request.method == 'GET':
+        form = ComputerForm()
+        return render(request, "computer_add.html", {"form": form})
+    return redirect(reverse('index'))
+  except:
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def computer_edit(request, id):
   try:
@@ -44,9 +47,14 @@ def computer_edit(request, id):
       computer.cost = request.POST.get("cost")
       computer.photo = request.POST.get("photo")
       computer.save()
-      return redirect(reverse('index'))
+      form = ComputerForm(request.POST, files=request.FILES, instance=computer)
+      if form.is_valid():
+        form.save()
+        return redirect(reverse('index'))
+      else:
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
-      form = ComputerForm(instance=computer, files=request.FILES)
+      form = ComputerForm(instance=computer)
       return render(request, "computer_edit.html", {"form": form, 'computer': computer})
   except Computer.DoesNotExist:
     return HttpResponseNotFound("Computer not found")
@@ -67,18 +75,16 @@ def os_add(request, id):
     os.name = request.POST.get("name")
     os.publication_year = request.POST.get("publication_year")
     os.computer = computer
+    print(os)
     os.save()
-  else:
-    if request.method == 'GET':
-      return render(request, "computer.html")
 
-  return HttpResponseRedirect("/")
+  return redirect(request.META.get('HTTP_REFERER'))
 
 def os_delete(request, id):
   try:
     os = OperatingSystem.objects.get(pk=id)
     os.delete()
-    return HttpResponseRedirect("/")
+    return redirect(request.META.get('HTTP_REFERER'))
   except Computer.DoesNotExist:
     return HttpResponseNotFound("OperatingSystem not found")
 
@@ -89,22 +95,40 @@ def os_edit(request, id):
     if request.method == "POST":
       os.name = request.POST.get("name")
       os.publication_year = request.POST.get("publication_year")
-      os.save()
-      return HttpResponseRedirect("/")
+      try:
+        os.save()
+        return redirect(reverse('index'))
+        # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+      except:
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
-      return render(request, "os_edit.html", {"os_edit": os})
-
+      return render(request, "os_edit.html", {"os": os})
   except Computer.DoesNotExist:
-    return HttpResponseNotFound("Computer not found")
+    return HttpResponseNotFound("Operation System not found")
 
 def report(request):
-    operating_systems = OperatingSystem.objects.all()
-    computers = Computer.objects.all()
+  operating_systems = OperatingSystem.objects.all()
+  computers = Computer.objects.all()
 
-    operating_systems_join_computers = [{'operating_systems': o, 'computers': c}
-      for c in computers
-      for o in operating_systems
-      if o.computer.id == c.id
-    ]
+  operating_systems_join_computers = [{'operating_systems': o, 'computers': c}
+    for c in computers
+    for o in operating_systems
+    if o.computer.id == c.id
+  ]
 
-    return render(request, 'report.html', {'r': operating_systems_join_computers, 'oss': operating_systems, 'computers': computers})
+  computer_sum_count_dict = {}
+  for os_computers_row in operating_systems_join_computers:
+    computer_name = os_computers_row['computers'].name
+    # os_publication_year = os_computers_row['operating_systems'].publication_year
+    os_name = os_computers_row['operating_systems'].name
+
+    if computer_name in computer_sum_count_dict:
+      computer_sum_count_dict[computer_name].append(os_name)
+    else:
+      computer_sum_count_dict[computer_name] = [os_name,]
+  
+  for c in computers:
+    if c not in computer_sum_count_dict:
+      computer_sum_count_dict[c] = ['Нет операционных систем']
+
+  return render(request, 'report.html', {'os_comp': computer_sum_count_dict})

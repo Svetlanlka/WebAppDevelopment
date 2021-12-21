@@ -1,0 +1,20 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="mt-5">Donuts</h1>
+    <div class="donuts">
+      {% for donut in donuts %}
+      <div class="card" style="width: 18rem;">
+        <img src = "{{MEDIA_URL}}{{donut.picture.url}}" class="card-img-top donut-img" alt={{donut.name}}>
+        <div class="card-body">
+          <h5 class="card-title">{{donut.cost}}</h5>
+          <p class="card-text">{{donut.name}}</p>
+          <a href="{% url 'donut' id=donut.id %}" class="btn btn-primary">Подробнее</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

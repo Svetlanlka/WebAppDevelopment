@@ -1,0 +1,27 @@
+from models.operating_system_computer import OperatingSystemComputer
+
+computers_with_operation_systems = [
+    OperatingSystemComputer(1, 3),
+    OperatingSystemComputer(1, 2),
+    OperatingSystemComputer(1, 1),
+    OperatingSystemComputer(2, 3),
+    OperatingSystemComputer(3, 1),
+    OperatingSystemComputer(3, 22),
+    OperatingSystemComputer(4, 3),
+    OperatingSystemComputer(5, 2),
+    OperatingSystemComputer(6, 2),
+    OperatingSystemComputer(7, 1),
+    OperatingSystemComputer(8, 1),
+    OperatingSystemComputer(9, 1),
+    OperatingSystemComputer(9, 2),
+    OperatingSystemComputer(9, 3),
+    OperatingSystemComputer(9, 11),
+    OperatingSystemComputer(10, 11),
+    OperatingSystemComputer(11, 11),
+    OperatingSystemComputer(11, 12),
+    OperatingSystemComputer(12, 1),
+    OperatingSystemComputer(12, 2),
+    OperatingSystemComputer(12, 3),
+    OperatingSystemComputer(12, 11),
+    OperatingSystemComputer(12, 22),
+]

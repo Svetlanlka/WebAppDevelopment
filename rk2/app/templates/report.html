@@ -1,0 +1,23 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container mb-5">
+    <h1 class="mt-5 d-flex justify-content-end">
+      <a href="{% url 'index' %}" class="btn btn-primary">Вернуться на главную страницу</a>
+    </h1>
+    <h1>Отчет</h1>
+    {% for comp, oss in os_comp.items %}
+      <div class="card-body">
+        <h3 class="card-title">{{comp}}</h3>
+        <!-- <p class="card-text">{{rr.operating_systems.publication_year}} руб.</p> -->
+        <h5>Операционные системы:</h5>
+        <ul>
+        {% for os in oss %}
+        <li>{{os}}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

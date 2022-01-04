@@ -1,0 +1,25 @@
+:root {
+  color: white;
+}
+
+.card-img {
+  height: 20rem;
+}
+
+.card-computer {
+  width: 25rem;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.my-avatar {
+  width: 3rem;
+  height: min-content;
+}
+
+.plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

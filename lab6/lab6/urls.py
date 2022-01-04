@@ -13,9 +13,37 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from stocks import views as stock_views
+from django.urls import include, path
+from stocks import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'donuts', stock_views.DonutViewSet)
+router.register(r'donutssets', stock_views.DonutsSetViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('set/<int:id>',  views.set, name='set'),
+    path('set_add/', views.set_add, name='set_add'),
+    path('set_edit/<int:id>', views.set_edit, name='set_edit'),
+    path('set_delete/<int:id>', views.set_delete, name='set_delete'),
+    path('set/donut_add/<int:id>', views.donut_add, name='donut_add'),
+    path('donut_edit/<int:id>', views.donut_edit, name='donut_edit'),
+    path('donut_delete/<int:id>', views.donut_delete, name='donut_delete'),
+
+    path('', include(router.urls)),
+    path('api/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()

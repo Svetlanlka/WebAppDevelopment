@@ -23,7 +23,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('donuts/<int:id>',  views.donut, name='donut'),
+    path('set/<int:id>',  views.set, name='set'),
+    path('set_add/', views.set_add, name='set_add'),
+    path('set_edit/<int:id>', views.set_edit, name='set_edit'),
+    path('set_delete/<int:id>', views.set_delete, name='set_delete'),
+    path('set/donut_add/<int:id>', views.donut_add, name='donut_add'),
+    path('donut_edit/<int:id>', views.donut_edit, name='donut_edit'),
+    path('donut_delete/<int:id>', views.donut_delete, name='donut_delete'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,23 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5 d-flex justify-content-center">
+        {% block title %} Добавление сета {% endblock title %}
+    </h1>
+    {% block form %}
+    <form class="row" enctype="multipart/form-data" method="POST" novalidate>
+      {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {% bootstrap_form form show_label=False %}
+    <div class="d-flex justify-content-end mt-2">
+      <button class="btn btn-dark" type="submit">
+        Добавить
+      </button>
+    </div>
+    </form>
+    {% endblock form %}
+  </div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{
+  "name": "lab7",
+  "version": "1.0.0",
+  "description": "Репозиторий для курса \"Разработка Интернет приложений\" <br/>\r Студентка: Очеретная Светлана <br/>\r Группа: ИУ5-55Б",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svetlanlka/webappdevelopment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svetlanlka/webappdevelopment/issues"
+  },
+  "homepage": "https://github.com/svetlanlka/webappdevelopment#readme",
+  "devDependencies": {
+    "express": "^4.17.2"
+  }
+}

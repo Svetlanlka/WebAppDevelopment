@@ -11,7 +11,7 @@ export default class DonutCardComponent {
         <div class="card-body">
           <h2 class="card-title">${props.name}</h2>
           <h3 class="card-text">${props.cost} руб.</h3>
-          <button class="btn btn-primary" id="click-card-${props.id}" data-id="${props.id}">Подробнее о пончике</button>
+          <button class="btn btn-primary" id="click-card-${props.pk}" data-id="${props.pk}">Подробнее о пончике</button>
         </div>
       </div>
       `
@@ -20,11 +20,12 @@ export default class DonutCardComponent {
 
   addListeners(props, listener) {
     document
-        .getElementById(`click-card-${props.id}`)
+        .getElementById(`click-card-${props.pk}`)
         .addEventListener("click", listener);
   }
 
   render(props, listener) {
+    console.log("props id: ", props.pk)
     const html = this.getHTML(props)
     this.root.insertAdjacentHTML('beforeend', html)
     this.addListeners(props, listener);

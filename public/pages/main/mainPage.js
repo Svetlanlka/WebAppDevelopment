@@ -70,10 +70,8 @@ export default class MainPage {
     //   donutCard.render(item, this.clickCard.bind(this))
     // })
 
-    this.getData().then((data) => {
-      console.log("data:")
-      console.log(data)
-      data.forEach(item => {
+    this.getData().then(({response}) => {
+      response.forEach(item => {
         const donutCard = new DonutCardComponent(this.page)
         donutCard.render(item, this.clickCard.bind(this));
       });

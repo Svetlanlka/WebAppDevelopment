@@ -42,9 +42,9 @@ export default class DonutPage {
       // });
 
       const donut = new DonutComponent(this.page);
-      this.getData().then(({data}) => {
-        console.log("data:", data)
-        donut.render(data);
+      this.getData().then(({response}) => {
+        console.log("data:", response)
+        donut.render(response);
 
         const backBtn = new ButtonComponent(this.page);
         backBtn.render({sign: 'Назад'}, (e) => {

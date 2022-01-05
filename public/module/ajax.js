@@ -55,7 +55,7 @@ function ajaxCall(requestParams) {
   const url = APIurl + (requestParams.url || '/');
   const fetchParams = {
     body: JSON.stringify(requestParams.body),
-    mode: 'no-cors',
+    mode: 'cors',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
@@ -70,10 +70,6 @@ function ajaxCall(requestParams) {
   let status = 0;
   return fetch(url, fetchParams)
       .then((response) => {
-        if (ajaxDebug) {
-          console.log('ajax get ')
-          console.log(response);
-        }
         status = response.status;
         return response.json();
       })
@@ -87,9 +83,9 @@ function ajaxCall(requestParams) {
           response,
         };
       })
-      .catch((error) => {
-        console.warn(error);
-      });
+      // .catch((error) => {
+      //   // console.warn(error);
+      // });
 }
 
 // Плагин для общения с API

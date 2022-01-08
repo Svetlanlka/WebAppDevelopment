@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import StartPage from "./pages/start/startPage";
+import MainPage from "./pages/main/mainPage";
+import "./App.css"
 
 function App() {
 
@@ -11,16 +13,16 @@ function App() {
               <Link to="/">Старт</Link>
             </li>
             <li>
-              <Link to="/new">Хочу на страницу с чем-то новеньким</Link>
+              <Link to="/example">Хочу на страницу с чем-то новеньким</Link>
             </li>
           </ul>
           <hr />
           <Switch>
             <Route exact path="/">
-              <StartPage/>
+              <MainPage/>    
             </Route>
-            <Route path="/new">
-              <h1>Это наша страница с чем-то новеньким</h1>
+            <Route path="/example">
+              <StartPage/>
             </Route>
           </Switch>
         </div>

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import {Card, Col, Row, Button, Spinner} from "react-bootstrap";
+import React, {useState} from 'react';
 import DonutCard from '../../components/donutCard/donutCard';
 import InputField from '../../components/inputField/inputField';
 import Loading from '../../components/loading/loading';

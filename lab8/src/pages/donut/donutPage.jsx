@@ -4,8 +4,6 @@ import DonutCard from '../../components/donutCard/donutCard';
 
 const DonutPage = ({donuts}) => {
   const {donutId} = useParams();
-  console.log("donut ID:")
-  console.log({donutId} , typeof diskId);
   const donut = donuts.find((d) => d.pk + '' === donutId)
 
   return (

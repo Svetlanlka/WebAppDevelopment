@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {useEffect, useState} from 'react';
 
 import MainPage from "./pages/main/mainPage";

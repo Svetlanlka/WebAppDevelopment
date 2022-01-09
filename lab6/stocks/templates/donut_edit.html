@@ -1,0 +1,35 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5 d-flex justify-content-center">
+        Изменение параметров пончика
+    </h1>
+    <form class="row donut-form" method="POST" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="name" class="form-label">Название</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{donut.name}}">
+      </div>
+      <div class="mb-3">
+        <label for="info" class="form-label">Информация</label>
+        <textarea class="form-control" id="info" rows="3" name="info">{{donut.info}}</textarea>
+      </div>
+      <div class="mb-3">
+        <label for="cost" class="form-label">Стоимость</label>
+        <input type="text" class="form-control" id="cost" name="cost" value="{{donut.cost}}">
+      </div>
+      <div class="mb-3">
+        <label for="picture" class="form-label">Фото</label>
+        <input type="file" class="form-control" id="picture" name="picture" value="{{donut.picture}}">
+      </div>
+      <div class="d-flex justify-content-end mt-2">
+        <button class="btn btn-dark donut-form-submit" type="submit">
+          Изменить
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

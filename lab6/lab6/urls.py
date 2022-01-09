@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from stocks import views as stock_views
+# from stocks import views as stock_views
 from django.urls import include, path
 from stocks import views
 from django.conf import settings
@@ -24,8 +24,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'donuts', stock_views.DonutViewSet)
-router.register(r'donutssets', stock_views.DonutsSetViewSet)
+router.register(r'donuts', views.DonutViewSet)
+router.register(r'donutssets', views.DonutsSetViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

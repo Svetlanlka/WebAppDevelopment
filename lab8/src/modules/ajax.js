@@ -1,8 +1,6 @@
 import urls from './urls.js';
 
 const APIurl = urls.url;
-// const name = 'radiohead';
-// const APIurl = `https://itunes.apple.com/search?term=${name}`
 const ajaxDebug = true;
 
 /**
